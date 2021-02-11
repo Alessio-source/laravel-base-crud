@@ -7,8 +7,6 @@
 
         <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 
-        <link href = {{ asset("bootstrap/app.css") }} rel="stylesheet" />
-
         <title>Birre</title>
     </head>
     <body>
@@ -20,7 +18,8 @@
                 <p>{{ $item->description }}</p>
             </div>
         @endforeach
+
+        <a class="btn btn-info" href="{{ route('create') }}">Aggiungi</a>
         </main>
-        
     </body>
 </html>
