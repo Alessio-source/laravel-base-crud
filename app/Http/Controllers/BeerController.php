@@ -48,7 +48,7 @@ class BeerController extends Controller
         $add->fill($data);
         $result = $add->save();
 
-        return redirect()->route('index');
+        return redirect()->route('beer.index');
     }
 
     /**
@@ -68,9 +68,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Beer $beer)
     {
-        //
+        return view('edit', compact('beer'));
     }
 
     /**
@@ -80,9 +80,19 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Beer $beer)
     {
-        //
+        $data = $request->all();
+
+        $request->validate(
+            [
+                'name' => 'required|max:50',
+                'description' => 'required'
+            ]
+        );
+
+        $beer->update($data);
+        return redirect()->route('beer.index');
     }
 
     /**
@@ -91,8 +101,9 @@ class BeerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Beer $beer)
     {
-        //
+        $beer->delete();
+        return redirect()->route('beer.index');
     }
 }

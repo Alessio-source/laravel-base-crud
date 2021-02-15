@@ -23,19 +23,19 @@
                 </div>
             @endif
 
-            <form action="{{ route('beer.store') }}" method="post">
+            <form action="{{ route('beer.update', $beer->id) }}" method="post">
                 @csrf
-                @method('POST')
+                @method('PUT')
                 <div class="form-group">
                     <label for="name">Nome</label>
-                    <input type="text" class="form-control" id="name" name="name" placeholder="Inserisci il nome di una birra">
+                    <input type="text" class="form-control" id="name" name="name" value="{{ $beer->name }}">
                 </div>
                 <div class="form-group">
                     <label for="description">Descrizione</label>
-                    <textarea class="form-control" id="description" name="description" rows="3" placeholder="Inserisci una descrizione"></textarea>
+                    <textarea class="form-control" id="description" name="description" rows="3">{{ $beer->description }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Aggiungi</button>
+                <button type="submit" class="btn btn-primary">Modifica</button>
                 <a class="btn btn-info" href="{{ route('beer.index') }}">Torna alla home</a>
             </form>
         </div>     
